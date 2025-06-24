@@ -1,0 +1,252 @@
+/* Base Styles */
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #f0f2f5;
+    margin: 0;
+    padding: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    color: #333;
+}
+
+/* Chat Container */
+.chat-container {
+    width: 100%;
+    max-width: 600px;
+    background-color: white;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    height: 90vh;
+    max-height: 800px;
+}
+
+/* Header */
+h1 {
+    background-color: #4a6fa5;
+    color: white;
+    margin: 0;
+    padding: 18px;
+    font-size: 1.5em;
+    text-align: center;
+    font-weight: 600;
+}
+
+/* Quick Questions Section */
+.quick-questions {
+    padding: 15px;
+    border-bottom: 1px solid #e1e4e8;
+    background-color: #f8f9fa;
+}
+
+.quick-questions h3 {
+    margin: 0 0 10px 0;
+    color: #4a6fa5;
+    font-size: 0.95em;
+    font-weight: 500;
+}
+
+.quick-buttons {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+}
+
+.quick-btn {
+    padding: 6px 12px;
+    background-color: #e9ecf3;
+    border: none;
+    border-radius: 15px;
+    cursor: pointer;
+    font-size: 0.85em;
+    transition: all 0.2s;
+    color: #4a6fa5;
+}
+
+.quick-btn:hover {
+    background-color: #4a6fa5;
+    color: white;
+    transform: translateY(-1px);
+}
+
+/* Chat Box */
+.chat-box {
+    flex-grow: 1;
+    overflow-y: auto;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    background-color: #fafbfc;
+}
+
+/* Message Styles */
+.user-message, .bot-message {
+    max-width: 85%;
+    padding: 12px 16px;
+    border-radius: 18px;
+    margin-bottom: 4px;
+    line-height: 1.4;
+    position: relative;
+    word-wrap: break-word;
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+}
+
+.user-message {
+    align-self: flex-end;
+    background-color: #4a6fa5;
+    color: white;
+    border-bottom-right-radius: 4px;
+}
+
+.bot-message {
+    align-self: flex-start;
+    background-color: #ffffff;
+    color: #333;
+    border-bottom-left-radius: 4px;
+    border: 1px solid #e1e4e8;
+}
+
+/* Typing Indicator */
+#typingIndicator {
+    color: #666;
+    font-style: italic;
+}
+
+#typingIndicator::after {
+    content: '...';
+    display: inline-block;
+    width: 1em;
+    animation: dots 1.5s steps(5, end) infinite;
+}
+
+@keyframes dots {
+    0%, 20% { content: '.'; }
+    40% { content: '..'; }
+    60%, 100% { content: '...'; }
+}
+
+/* Input Area */
+.input-area {
+    display: flex;
+    padding: 15px;
+    border-top: 1px solid #e1e4e8;
+    background-color: white;
+}
+
+.input-area input {
+    flex-grow: 1;
+    padding: 12px;
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    outline: none;
+    font-size: 1em;
+    transition: border 0.2s;
+}
+
+.input-area input:focus {
+    border-color: #4a6fa5;
+    box-shadow: 0 0 0 2px rgba(74, 111, 165, 0.2);
+}
+
+.input-area button {
+    margin-left: 10px;
+    padding: 12px 20px;
+    background-color: #4a6fa5;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    font-weight: 500;
+    transition: all 0.2s;
+}
+
+.input-area button:hover {
+    background-color: #3a5a80;
+    transform: translateY(-1px);
+}
+
+.input-area button:active {
+    transform: translateY(0);
+}
+
+/* Clear History Button */
+.clear-btn {
+    margin: 10px 15px;
+    padding: 8px 16px;
+    background-color: #f44336;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    align-self: flex-end;
+    font-size: 0.85em;
+    transition: all 0.2s;
+}
+
+.clear-btn:hover {
+    background-color: #d32f2f;
+    transform: translateY(-1px);
+}
+
+.clear-btn:active {
+    transform: translateY(0);
+}
+
+/* Scrollbar Styling */
+.chat-box::-webkit-scrollbar {
+    width: 8px;
+}
+
+.chat-box::-webkit-scrollbar-track {
+    background: #f1f1f1;
+    border-radius: 4px;
+}
+
+.chat-box::-webkit-scrollbar-thumb {
+    background: #c1c1c1;
+    border-radius: 4px;
+}
+
+.chat-box::-webkit-scrollbar-thumb:hover {
+    background: #a8a8a8;
+}
+
+/* Responsive Design */
+@media (max-width: 600px) {
+    body {
+        padding: 10px;
+    }
+    
+    .chat-container {
+        height: 95vh;
+        border-radius: 8px;
+    }
+    
+    h1 {
+        padding: 15px;
+        font-size: 1.3em;
+    }
+    
+    .user-message, .bot-message {
+        max-width: 90%;
+        padding: 10px 14px;
+        font-size: 0.95em;
+    }
+    
+    .input-area {
+        padding: 12px;
+    }
+    
+    .input-area input {
+        padding: 10px;
+    }
+    
+    .input-area button {
+        padding: 10px 16px;
+    }
+}
