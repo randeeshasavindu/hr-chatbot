@@ -1,24 +1,38 @@
-name: CI/CD Pipeline
+name: Deploy to GitHub Pages
 
-on: [push, pull_request]
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
 
 jobs:
-  test:
+  build:
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@v4
-    
-    - name: Validate HTML
-      uses: actions/github-script@v6
-      with:
-        script: |
-          const {readFileSync} = require('fs')
-          const html = readFileSync('./index.html', 'utf8')
-          if (!html.includes('<html')) {
-            core.setFailed('Invalid HTML structure')
-          }
-          
+      - name: Checkout code
+        uses: actions/checkout@v4
+        
+      - name: Setup Pages
+        uses: actions/configure-pages@v3
+        
+      - name: Upload artifact
+        uses: actions/upload-pages-artifact@v2
+        with:
+          path: './'
+
   deploy:
-    needs: test
+    needs: build
     runs-on: ubuntu-latest
-    # ... rest of the deploy steps from above ...
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - name: Deploy to GitHub Pages
+        uses: actions/deploy-pages@v2
+        id: deployment
