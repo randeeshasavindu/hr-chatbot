@@ -1,0 +1,24 @@
+name: CI/CD Pipeline
+
+on: [push, pull_request]
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v4
+    
+    - name: Validate HTML
+      uses: actions/github-script@v6
+      with:
+        script: |
+          const {readFileSync} = require('fs')
+          const html = readFileSync('./index.html', 'utf8')
+          if (!html.includes('<html')) {
+            core.setFailed('Invalid HTML structure')
+          }
+          
+  deploy:
+    needs: test
+    runs-on: ubuntu-latest
+    # ... rest of the deploy steps from above ...
